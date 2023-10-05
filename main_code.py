@@ -30,6 +30,7 @@ def publicaciones(data):
 
 
 def main():
+    data = pd.
     data = pd.read_csv("vgsales.csv")
     publicaciones(data)
 
