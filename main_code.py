@@ -1,6 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+#Esto lo hizo cyrce
+#"Nada"
+
 plt.style.use('_mpl-gallery')
 
 def publicaciones(data):
