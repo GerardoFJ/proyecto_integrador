@@ -4,6 +4,11 @@ import matplotlib.pyplot as plt
 #Esto lo hizo cyrce
 #"Nada"
 
+
+#afsafa
+#asfasfafa
+
+
 plt.style.use('_mpl-gallery')
 
 def publicaciones(data):
