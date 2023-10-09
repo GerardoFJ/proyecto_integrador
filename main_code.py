@@ -2,18 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def menu():
-    ///////////////BIENVENIDO/////////////////////
-    """Elige una opcion para graficar los datos de los videojuegos"""
-    num= int(input())
-    if num == 1:
+    print("""///////////////BIENVENIDO/////////////////////""") 
+    print("""Elige una opcion que quieras conocer por medio de una grafica:""")
     print("1. Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento")
-
     print("2. Graficar las Ventas Globales con respecto a la Compañía de videojuegos")
     print("3. Graficar las Ventas de NorteAmérica con respecto al año")
     print("4. Graficar el Género del videojuego con respecto a los Años de lanzamiento")
     print("5. Determinar el top 3 de videojuegos más populares de cada género")
     print("6. Salir")
-    
+    num = int(input("Ingresa el numero de la opcion que deseas:"))
+    return num
 
 
 
@@ -151,11 +149,26 @@ def top_x_genero(data):
 
 def main():
     data = pd.read_csv("vgsales.csv")
-    #publicaciones(data)
-    #global_sales(data)
-    #salesNA_by_year(data)
-    globalsales_x_genre(data)
-    #genero_x_year(data)
+    num = menu()
+    if num == 1:
+        publicaciones(data)
+    elif num == 2:
+        global_sales(data)
+    elif num == 3:
+        salesNA_by_year(data)
+    elif num == 4:
+        globalsales_x_genre(data)
+    elif num == 5:
+        genero_x_year(data)
+    elif num == 6:
+        exit()
+    print("Desea volver al menu principal?")
+    respuesta = str(input( "Si/No: "))
+    if respuesta == "Si":
+        menu()
+    else:
+        print("Gracias por usar el programa")
+        exit()   
 
 if __name__ == "__main__":
     main()
