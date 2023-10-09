@@ -1,33 +1,57 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-plt.style.use('_mpl-gallery')
+def menu():
+    ///////////////BIENVENIDO/////////////////////
+    """Elige una opcion para graficar los datos de los videojuegos"""
+    num= int(input())
+    if num == 1:
+    print("1. Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento")
+    
+    print("2. Graficar las Ventas Globales con respecto a la Compañía de videojuegos")
+    print("3. Graficar las Ventas de NorteAmérica con respecto al año")
+    print("4. Graficar el Género del videojuego con respecto a los Años de lanzamiento")
+    print("5. Determinar el top 3 de videojuegos más populares de cada género")
+    print("6. Salir")
+    
+
+
+
+
 
 def separador(lista_init):
     lista_fin = []
     for i in lista_init:
-        if i not in lista_fin:
-            lista_fin.append(i)
+        try:
+            if str(int(i)) not in lista_fin:
+                lista_fin.append(str(int(i)))
+        except:
+            if str(i) not in lista_fin:
+                lista_fin.append(str(i))
+
     return lista_fin
 
 
 #Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento
 def publicaciones(data):
     list_years = data["Year"].tolist()
-    list_y = []
+    list_only_one_year = separador(list_years)
+    list_only_one_year.sort()
+    list_count = [0 for i in range(len(list_only_one_year))]
+    for i in list_years:
+        try:
+            list_count[list_only_one_year.index(str(int(i)))] += 1
+        except:
+            list_count[list_only_one_year.index(str(i))] += 1
     
-    list_count =[]
-    for i in list_y:
-        list_count.append(list_years.count(i))
+    
+    #print(list_only_one_year)
+    #print(list_count)
 
-    fig, ax = plt.subplots()
-
-    ax.bar(list_y, list_count)
-
-    ax.set_ylabel('AÑOS')
-    ax.set_title('Publicaciones por año')
-    ax.legend(title='Publicaciones por año')
-
+    
+    plt.bar(list_only_one_year, list_count)
+    plt.xticks(rotation=90)
+    plt.tight_layout()
     plt.show()
 
 #Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento    
@@ -47,7 +71,7 @@ def globalsales_x_genre(data):
     print(list_sales)
     print (len(list_generos))
     print (len(list_sales))
-    plt.bar(list_generos, list_sales)
+    plt.plot(list_generos, list_sales)
     plt.xticks(rotation=90)
     plt.show()
 
@@ -87,7 +111,7 @@ def global_sales(data):
     print(list_sales)
     print (len(list_plataform))
     print (len(list_sales))
-    plt.bar(list_plataform, list_sales)
+    plt.stem(list_plataform, list_sales)
     plt.xticks(rotation=90)
     plt.show()
     
@@ -96,16 +120,23 @@ def salesNA_by_year(data):
     ventas = data["NA_Sales"].tolist()
     años = data["Year"].tolist()
     list_years = separador(años)
+    list_years.sort()
     list_sales = [0 for i in range(len(list_years))]
-
+    print(list_years)
+    
     for i in range(len(ventas)):
-        list_sales[list_years.index(años[i])] += ventas[i]
+        try:
+            list_sales[list_years.index(str(int(años[i])))] += round(ventas[i],2)
+        except:
+            list_sales[list_years.index(str(años[i]))] += round(ventas[i],2)
+    
 
     print (list_years)
     print (list_sales)
     print (len(list_years))
     print (len(list_sales))
-    plt.bar(list_years, list_sales)
+    
+    plt.stackplot(list_years, list_sales)
     plt.xticks(rotation=90)
     plt.show()
 
@@ -123,8 +154,8 @@ def main():
     #publicaciones(data)
     #global_sales(data)
     #salesNA_by_year(data)
-    #globalsales_x_genre(data)
-    genero_x_year(data)
+    globalsales_x_genre(data)
+    #genero_x_year(data)
 
 if __name__ == "__main__":
     main()
