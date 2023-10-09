@@ -7,7 +7,7 @@ def menu():
     num= int(input())
     if num == 1:
     print("1. Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento")
-    
+
     print("2. Graficar las Ventas Globales con respecto a la Compañía de videojuegos")
     print("3. Graficar las Ventas de NorteAmérica con respecto al año")
     print("4. Graficar el Género del videojuego con respecto a los Años de lanzamiento")
