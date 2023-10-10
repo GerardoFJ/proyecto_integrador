@@ -20,11 +20,10 @@ def separador(lista_init):
     lista_fin = []
     for i in lista_init:
         try:
-            if str(int(i)) not in lista_fin:
+            if (int(i)) not in lista_fin:
                 lista_fin.append(str(int(i)))
         except:
-            if str(i) not in lista_fin:
-                lista_fin.append(str(i))
+            pass
 
     return lista_fin
 
@@ -39,7 +38,7 @@ def publicaciones(data):
         try:
             list_count[list_only_one_year.index(str(int(i)))] += 1
         except:
-            list_count[list_only_one_year.index(str(i))] += 1
+            pass
     plt.bar(list_only_one_year, list_count)
     plt.xticks(rotation=90)
     plt.tight_layout()
@@ -58,10 +57,7 @@ def globalsales_x_genre(data):
     for i in range(len(global_sales)):
         list_sales[list_generos.index(genero[i])] += global_sales[i]
     
-    print(list_generos)
-    print(list_sales)
-    print (len(list_generos))
-    print (len(list_sales))
+    
     plt.plot(list_generos, list_sales)
     plt.xticks(rotation=90)
     plt.show()
@@ -77,10 +73,7 @@ def genero_x_year(data):
     for i in range(len(genero)):
         list_count[list_generos.index(genero[i])] += 1
 
-    print(list_generos)
-    print(list_count)
-    print (len(list_generos))
-    print (len(list_count))
+    
     plt.bar(list_generos, list_count)
     plt.xticks(rotation=90)
     plt.show()  
@@ -92,16 +85,12 @@ def global_sales(data):
     ventas = data["Global_Sales"].tolist()
     company = data["Platform"].tolist()
     list_plataform = separador(company)
-    
-    list_sales = [0 for i in range(len(list_plataform))]
+    list_sales = separador(ventas)
     
     for i in range(len(ventas)):
-        list_sales[list_plataform.index(company[i])] += ventas[i]
-    
-    print(list_plataform)
-    print(list_sales)
-    print (len(list_plataform))
-    print (len(list_sales))
+        if i < len(list_plataform):
+            list_sales[list_plataform.index(company[i])] += ventas[i]
+
     plt.stem(list_plataform, list_sales)
     plt.xticks(rotation=90)
     plt.show()
@@ -113,7 +102,6 @@ def salesNA_by_year(data):
     list_years = separador(años)
     list_years.sort()
     list_sales = [0 for i in range(len(list_years))]
-    print(list_years)
     
     for i in range(len(ventas)):
         try:
@@ -122,11 +110,7 @@ def salesNA_by_year(data):
             list_sales[list_years.index(str(años[i]))] += round(ventas[i],2)
     
 
-    print (list_years)
-    print (list_sales)
-    print (len(list_years))
-    print (len(list_sales))
-    
+   
     plt.stackplot(list_years, list_sales)
     plt.xticks(rotation=90)
     plt.show()
@@ -141,8 +125,9 @@ def top_x_genero(data):
 
 #Main Function
 def main():
+    respuesta = "si"
     data = pd.read_csv("vgsales.csv")
-    while True:
+    while respuesta.lower() in ("si", "si"):
         num = menu()
         if num == 1:
             publicaciones(data)
@@ -157,13 +142,8 @@ def main():
         else:
             print("Gracias por usar el programa")
             break
-        
         print("Desea volver al menu principal?")
         respuesta = input( "Si/No: ").lower()
-        if respuesta != "Si":
-                print("Gracias por usar el programa")
-                break
-        else 
           
 
 if __name__ == "__main__":
