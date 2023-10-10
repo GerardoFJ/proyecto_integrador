@@ -1,22 +1,21 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+#FUNCION MENU PARA MOSTRAR LAS OPCIONES EN LA CONSOLA
 def menu():
-    print("""///////////////BIENVENIDO/////////////////////""") 
+    print("********************************************BIENVENIDO********************************************") 
     print("""Elige una opcion que quieras conocer por medio de una grafica:""")
     print("1. Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento")
     print("2. Graficar las Ventas Globales con respecto a la Compañía de videojuegos")
     print("3. Graficar las Ventas de NorteAmérica con respecto al año")
     print("4. Graficar el Género del videojuego con respecto a los Años de lanzamiento")
     print("5. Determinar el top 3 de videojuegos más populares de cada género")
-    print("6. Salir")
-    num = int(input("Ingresa el numero de la opcion que deseas:"))
+    print("Otro numero para salir")
+    num = int(input("Ingresa el numero de la opcion que deseas: "))
     return num
 
 
-
-
-
+#FUNCION PARA SEPARAR EN 1 SOLO ELEMENTO LOS DATOS REPETIDOS
 def separador(lista_init):
     lista_fin = []
     for i in lista_init:
@@ -41,12 +40,6 @@ def publicaciones(data):
             list_count[list_only_one_year.index(str(int(i)))] += 1
         except:
             list_count[list_only_one_year.index(str(i))] += 1
-    
-    
-    #print(list_only_one_year)
-    #print(list_count)
-
-    
     plt.bar(list_only_one_year, list_count)
     plt.xticks(rotation=90)
     plt.tight_layout()
@@ -99,7 +92,7 @@ def global_sales(data):
     ventas = data["Global_Sales"].tolist()
     company = data["Platform"].tolist()
     list_plataform = separador(company)
-
+    
     list_sales = [0 for i in range(len(list_plataform))]
     
     for i in range(len(ventas)):
@@ -146,29 +139,32 @@ def top_x_genero(data):
 
     
 
-
+#Main Function
 def main():
     data = pd.read_csv("vgsales.csv")
-    num = menu()
-    if num == 1:
-        publicaciones(data)
-    elif num == 2:
-        global_sales(data)
-    elif num == 3:
-        salesNA_by_year(data)
-    elif num == 4:
-        globalsales_x_genre(data)
-    elif num == 5:
-        genero_x_year(data)
-    elif num == 6:
-        exit()
-    print("Desea volver al menu principal?")
-    respuesta = str(input( "Si/No: "))
-    if respuesta == "Si":
-        menu()
-    else:
-        print("Gracias por usar el programa")
-        exit()   
+    while True:
+        num = menu()
+        if num == 1:
+            publicaciones(data)
+        elif num == 2:
+            global_sales(data)
+        elif num == 3:
+            salesNA_by_year(data)
+        elif num == 4:
+            globalsales_x_genre(data)
+        elif num == 5:
+            genero_x_year(data)
+        else:
+            print("Gracias por usar el programa")
+            break
+        
+        print("Desea volver al menu principal?")
+        respuesta = input( "Si/No: ").lower()
+        if respuesta != "Si":
+                print("Gracias por usar el programa")
+                break
+        else 
+          
 
 if __name__ == "__main__":
     main()
