@@ -132,11 +132,9 @@ def top_x_genero(data):
 def main():
     data = pd.read_csv("vgsales.csv")
     publicaciones(data)
-
-    """
     respuesta = "si"
     data = pd.read_csv("vgsales.csv")
-    while respuesta.lower() in ("si", "si"):
+    while respuesta.lower() in ("si", "si","si","si"):
         num = menu()
         if num == 1:
             publicaciones(data)
@@ -153,7 +151,6 @@ def main():
             break
         print("Desea volver al menu principal?")
         respuesta = input( "Si/No: ").lower()
-        """
 
 if __name__ == "__main__":
     main()
