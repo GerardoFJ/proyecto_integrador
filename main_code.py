@@ -134,7 +134,7 @@ def main():
     publicaciones(data)
     respuesta = "si"
     data = pd.read_csv("vgsales.csv")
-    while respuesta.lower() in ("si", "si","si","si"):
+    while respuesta.lower() in ("si", "si", "si", "si"):
         num = menu()
         if num == 1:
             publicaciones(data)
