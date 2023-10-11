@@ -24,7 +24,6 @@ def separador(lista_init):
                 lista_fin.append(str(int(i)))
         except:
             pass
-
     return lista_fin
 
 
@@ -40,14 +39,20 @@ def publicaciones(data):
         except:
             pass
     plt.bar(list_only_one_year, list_count)
-    plt.xticks(rotation=90)
+    plt.title("Cantidad de videojuegos publicados segun el año")
+    plt.xlabel("Año de Lanzamiento")
+    plt.ylabel("Cantidad de videojuegos publicados")
+    plt.xticks(rotation=80)
     plt.tight_layout()
     plt.show()
+
+
 
 #Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento    
 def globalsales_x_genre(data):
     genero = data["Genre"].tolist()
     global_sales = data["Global_Sales"].tolist()
+    
     list_generos = separador(genero)
     if 1989 in list_generos:
         list_generos.remove(1989)
@@ -125,6 +130,10 @@ def top_x_genero(data):
 
 #Main Function
 def main():
+    data = pd.read_csv("vgsales.csv")
+    publicaciones(data)
+
+    """
     respuesta = "si"
     data = pd.read_csv("vgsales.csv")
     while respuesta.lower() in ("si", "si"):
@@ -144,7 +153,7 @@ def main():
             break
         print("Desea volver al menu principal?")
         respuesta = input( "Si/No: ").lower()
-          
+        """
 
 if __name__ == "__main__":
     main()
