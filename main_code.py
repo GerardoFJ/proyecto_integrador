@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 #FUNCION MENU PARA MOSTRAR LAS OPCIONES EN LA CONSOLA
 
-
-
-
 #FUNCION PARA SEPARAR EN 1 SOLO ELEMENTO LOS DATOS REPETIDOS
 def separador(lista_init):
     lista_fin = []
@@ -294,29 +291,8 @@ def graphic_area(data):
 
 def main():
     data = pd.read_csv("vgsales.csv")
-    publicaciones(data)
+    
 
-    """
-    respuesta = "si"
-    data = pd.read_csv("vgsales.csv")
-    while respuesta.lower() in ("si", "si"):
-        num = menu()
-        if num == 1:
-            publicaciones(data)
-        elif num == 2:
-            global_sales(data)
-        elif num == 3:
-            salesNA_by_year(data)
-        elif num == 4:
-            globalsales_x_genre(data)
-        elif num == 5:
-            genero_x_year(data)
-        else:
-            print("Gracias por usar el programa")
-            break
-        print("Desea volver al menu principal?")
-        respuesta = input( "Si/No: ").lower()
-        """
 
 if __name__ == "__main__":
     main()
