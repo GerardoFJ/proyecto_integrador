@@ -1,7 +1,26 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 #FUNCION MENU PARA MOSTRAR LAS OPCIONES EN LA CONSOLA
+def menu():
+    print("********************************************BIENVENIDO********************************************") 
+    print("""Elige una opcion que quieras conocer por medio de una grafica:""")
+    print("1.Graficar la cantidad de videojuegos publicados con respecto al Año de Lanzamiento ")
+    print("2.Graficar las Ventas Globales con respecto al Género del videojuego")
+    print("3.Graficar las Ventas Globales con respecto a la Compañía de videojuegos ")
+    print("4.Graficar el Género del videojuego con respecto a los Años de lanzamiento")
+    print("5.Grafica la cantidad de videojuegos que hay por Género ")
+    print("6.Graficar las Ventas de NorteAmérica con respecto al año")
+    print("7.Graficar las Ventas Japón con respecto al año")
+    print("8.Graficar las Ventas Otros con respecto al año")
+    print("9.Determinar el top 3 de videojuegos más populares de cada género")
+    print("10.Determinar qué compañía genera mayores ventas.")
+    print("11.Determinar el porcentaje que aporta cada área geográfica a las Ventas Globales")
+    print("Otro numero para salir")
+    num = int(input("Ingresa el numero de la opcion que deseas: "))
+    return num
+
 
 #FUNCION PARA SEPARAR EN 1 SOLO ELEMENTO LOS DATOS REPETIDOS
 def separador(lista_init):
@@ -267,7 +286,7 @@ def top_companies(data):
     plt.tight_layout()
     plt.show()
     
-#. Determinar qué área geográfica tiene mayor derrame económico en comparación al resto.
+#.Determinar el porcentaje que aporta cada área geográfica a las Ventas Globales
 def graphic_area(data):
     na_sales = data["NA_Sales"].tolist()
     eu_sales = data["EU_Sales"].tolist()
@@ -288,10 +307,41 @@ def graphic_area(data):
 
     
 
-
+#Main Function
 def main():
+    respuesta = "si"
     data = pd.read_csv("vgsales.csv")
-    
+    while respuesta.lower() in ("si", "si"):
+        os.system("clear")
+        num = menu()
+        if num == 1:
+            publicaciones(data)
+        elif num == 2:
+            global_sales_genre(data)
+        elif num == 3:
+            global_sales_publisher(data)
+        elif num == 4:
+            genero_year(data)
+        elif num == 5:
+           videojuegos_genero(data)
+        elif num == 6:
+            north_america_sales_year(data)
+        elif num == 7:
+            japan_sales_year(data)
+        elif num == 8:
+            other_sales_year(data)
+        elif num == 9:
+            top_3_genero(data)
+        elif num == 10:
+            top_companies(data)
+        elif num == 11:
+            graphic_area(data)
+        else:
+            print("Gracias por usar el programa")
+            break
+        print("Desea volver al menu principal?")
+        respuesta = input( "Si/No: ").lower()
+          
 
 
 if __name__ == "__main__":
